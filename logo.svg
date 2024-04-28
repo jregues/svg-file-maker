@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300">
+            <class Square extends Shape {
+    constructor(color, sideLength) {
+        super(color);
+        this.sideLength = sideLength;
+    }
+
+    calculateArea() {
+        return this.sideLength ** 2;
+    }
+
+    calculatePerimeter() {
+        return 4 * this.sideLength
+    }
+} x="10" y="10" width="300" height="300" fill="blue" />
+            <text x="10" y="10" fill="blue">fff</text>
+            
+        </svg>
