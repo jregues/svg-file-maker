@@ -1,9 +1,8 @@
 const inquirer = require('inquirer');
 const colors = require('colors');
 const fs = require('fs');
-const Circle = require('./lib/shapes.js')
-const Triangle = require('./lib/shapes.js')
-const Square = require('./lib/shapes.js')
+const {Circle, Triangle, Square} = require('./lib/shapes.js')
+
 const questions = [{
     type: 'input',
     message: 'Please enter the text for your logo. Your text is limited to three characters',
@@ -31,17 +30,19 @@ inquirer
     .prompt(questions)
 
     .then((answers) => {
+        console.log(answers.shape)
+        let shape;
         if (answers.shape === 'Circle') {
-            answers.shape = Circle.draw();
+            shape = new Circle(answers.sColor, answers.tColor);
         } else if (answers.shape === 'Triangle') {
-            answers.shape = Triangle;
+            shape = new Triangle(answers.sColor, answers.tColor);
         } else if (answers.shape === 'Square') {
-            answers.shape = Square;
+            shape = new Square(answers.sColor, answers.tColor);
         };
         const file = (data) => {
-            return `<svg xmlns="file:///C:/Users/james/bootcamp/git-lab/svg-file-maker/logo.svg" width="300" height="300">
-            <${answers.shape} x="10" y="10" width="300" height="300" fill="${answers.sColor}" />
-            <text x="10" y="10" fill="${answers.tColor}">${answers.text}</text>
+            return `<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+            ${shape.render()}
+            <text x="150" y="125" font-size="60" text-anchor="middle" fill="${answers.tColor}">${answers.text}</text>
             
         </svg>`
         }
